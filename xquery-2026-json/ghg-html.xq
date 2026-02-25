@@ -43,6 +43,12 @@ declare function html:getCSS() as element(style) {
             font-size: 1.2em;
             color:red;
         }
+        
+        .datatable tbody tr.blocker td.mark {
+            font-size: 1.2em;
+            color:red;
+        }
+        
         .datatable tbody tr.error td.mark {
             font-size: 1.2em;
             color:red;
@@ -81,6 +87,9 @@ declare function html:getCSS() as element(style) {
         }
         .bg-error {
             background:pink;
+        }
+        .bg-blocker {
+            background:red;
         }
         .bg-warning {
             background:bisque;
@@ -171,6 +180,7 @@ declare function html:getBullet($text as xs:string, $level as xs:string) as elem
     let $color :=
         switch ($level)
             case $errors:FAILED return $errors:COLOR_FAILED
+            case $errors:BLOCKER return $errors:COLOR_BLOCKER
             case $errors:ERROR return $errors:COLOR_ERROR
             case $errors:WARNING return $errors:COLOR_WARNING
             case $errors:SKIPPED return $errors:COLOR_SKIPPED

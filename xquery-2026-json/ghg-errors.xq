@@ -23,6 +23,7 @@ declare variable $errors:MEDIUM_LIMIT := 250;
 declare variable $errors:HIGH_LIMIT := 500;
 declare variable $errors:HIGHER_LIMIT := 1000;
 declare variable $errors:MAX_LIMIT := 1500;
+
 (: Returns error class if there are more than 0 error elements :)
 declare function errors:getClass($elems) {
     if (count($elems) > 0) then
@@ -34,16 +35,20 @@ declare function errors:getClass($elems) {
 declare function errors:getClassColor($class as xs:string) {
     switch ($class)
         case $errors:FAILED return $errors:COLOR_FAILED
+        case $errors:BLOCKER return $errors:COLOR_BLOCKER
         case $errors:ERROR return $errors:COLOR_ERROR
         case $errors:WARNING return $errors:COLOR_WARNING
         case $errors:INFO return $errors:COLOR_INFO
         default return $errors:COLOR_SKIPPED
 };
 
-declare function errors:getMaxError($records as element()*) as xs:string {
-    if (count($records[@class = $errors:FAILED]) > 0) then $errors:FAILED
-    else if (count($records[@class = $errors:ERROR]) > 0) then $errors:ERROR
-        else if (count($records[@class = $errors:WARNING]) > 0) then $errors:WARNING
-            else if (count($records[@class = $errors:SKIPPED]) > 0) then $errors:SKIPPED
-                else $errors:INFO
+declare function errors:getMaxError($rows as element(tr)*) as xs:string {
+
+  if (exists($rows[@class = $errors:FAILED])) then $errors:FAILED
+  else if (exists($rows[@class = $errors:BLOCKER])) then $errors:BLOCKER
+  else if (exists($rows[@class = $errors:ERROR])) then $errors:ERROR
+  else if (exists($rows[@class = $errors:WARNING])) then $errors:WARNING
+  else if (exists($rows[@class = $errors:SKIPPED])) then $errors:SKIPPED
+  else $errors:INFO
+  
 };

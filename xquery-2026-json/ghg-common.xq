@@ -19,4 +19,3 @@ declare function common:stripSourceUrl($url as xs:string) {
     else
         $url
 };
-
