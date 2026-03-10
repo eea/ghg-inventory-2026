@@ -1,7 +1,7 @@
 xquery version "3.1";
 
 module namespace html = "ghg-html";
-import module namespace errors = "ghg-errors" at "ghg-errors.xq";
+import module namespace errors = "ghg-errors" at "ghg-errors_JSON.xq";
 
 declare function html:getHead() as element()* {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css">&#32;</link>

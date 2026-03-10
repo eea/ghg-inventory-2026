@@ -8,6 +8,7 @@ xquery version "3.1";
 :)
 
 module namespace dd = "ghg-dd";
+
 declare namespace skos = "http://www.w3.org/2004/02/skos/core#";
 declare namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 declare namespace adms="http://www.w3.org/ns/adms#";
